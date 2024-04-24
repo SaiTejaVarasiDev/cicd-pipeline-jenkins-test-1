@@ -20,29 +20,19 @@ pipeline {
                 // echo "$SF_SERVER_KEY"
             }
         }
-        // stage('Checking Server key access ') {
-        //     steps {
-        //         withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
-        //             echo "${secret_file_key}"
-        //         }
-        //     }
-        // }
-        // stage('copying server key file'){
-        //     steps {
-        //         withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
-        //             bat "cd"
-        //             bat "copy ${secret_file_key}"
-        //             bat "dir"
-        //         }
-                
-        //     }
-        // }
         stage('Authorize to org') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
                         bat "sf org login jwt --client-id ${SF_CONSUMER_KEY} --jwt-key-file ${secret_file_key} --username ${SF_USERNAME} --alias my-hub-org"
                     }
+                }
+            }
+        }
+        stage('Validate soure code on org') {
+            steps {
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    bat "sf project deploy validate -o ${SF_USERNAME} --source-dir force-app"
                 }
             }
         }
