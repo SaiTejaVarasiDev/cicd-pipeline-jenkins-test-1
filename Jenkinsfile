@@ -17,7 +17,7 @@ pipeline {
                 echo "$SF_INSTANCE_URL"
                 echo "$SF_USERNAME"
                 echo "$SF_CONSUMER_KEY"
-                echo "$SF_SERVER_KEY"
+                // echo "$SF_SERVER_KEY"
             }
         }
         // stage('Checking Server key access ') {
