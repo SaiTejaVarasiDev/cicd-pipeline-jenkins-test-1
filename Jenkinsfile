@@ -36,8 +36,10 @@ pipeline {
         }
         stage('Authorize to org') {
             steps {
-                 withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
-                    bat "sf org login jwt --client-id ${SF_CONSUMER_KEY} --jwt-key-file ${SERVER_KEY} --username ${SF_USERNAME} --alias my-hub-org"
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
+                        bat "sf org login jwt --client-id ${SF_CONSUMER_KEY} --jwt-key-file ${secret_file_key} --username ${SF_USERNAME} --alias my-hub-org"
+                    }
                 }
             }
         }
