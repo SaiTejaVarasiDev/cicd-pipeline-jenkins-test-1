@@ -7,6 +7,11 @@ pipeline {
         // SF_SERVER_KEY = credentials('SF_SERVER_KEY')
     }
     stages {
+        stage('production branch') {
+            steps {
+                echo 'production branch'
+            }
+        }
         stage('Checking sf installation') {
             steps {
                 bat 'sf --version'
@@ -36,13 +41,13 @@ pipeline {
                 }
             }
         }
-        stage('deploy soure code on org') {
-            steps {
-                withEnv(["HOME=${env.WORKSPACE}"]) {
-                    bat "sf project deploy quick --use-most-recent --target-org my-hub-org"
-                }
-            }
-        }
+        // stage('deploy soure code on org') {
+        //     steps {
+        //         withEnv(["HOME=${env.WORKSPACE}"]) {
+        //             bat "sf project deploy quick --use-most-recent --target-org my-hub-org"
+        //         }
+        //     }
+        // }
         
     }
 }
