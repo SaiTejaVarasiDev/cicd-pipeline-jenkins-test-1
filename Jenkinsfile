@@ -36,6 +36,13 @@ pipeline {
                 }
             }
         }
+        stage('deploy soure code on org') {
+            steps {
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    bat "sf project deploy quick --use-most-recent --target-org my-hub-org"
+                }
+            }
+        }
         
     }
 }
