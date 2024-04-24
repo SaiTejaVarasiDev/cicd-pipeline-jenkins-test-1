@@ -5,7 +5,6 @@ pipeline {
         SF_USERNAME = credentials('SF_USERNAME')
         SF_CONSUMER_KEY = credentials('SF_CONSUMER_KEY')
         SF_SERVER_KEY = credentials('SF_SERVER_KEY')
-        SERVER_KEY = credentials('Server_key')
         // toolbelt = tool 'salesforce_cli'
         // sf_path = "C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins/.jenkins/tools/com.cloudbees.jenkins.plugins.customtools.CustomTool/salesforce/sf/bin"
         
@@ -27,19 +26,19 @@ pipeline {
                 echo "$SF_SERVER_KEY"
             }
         }
-        stage('Checking Server key access ') {
-            steps {
-                withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
-                    echo "${secret_file_key}"
-                }
-            }
-        }
+        // stage('Checking Server key access ') {
+        //     steps {
+        //         withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
+        //             echo "${secret_file_key}"
+        //         }
+        //     }
+        // }
         stage('Authorize to org') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
+                    // withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
                         bat "sf org login jwt --client-id ${SF_CONSUMER_KEY} --jwt-key-file ${SF_SERVER_KEY} --username ${SF_USERNAME} --alias my-hub-org"
-                    }
+                    // }
                 }
             }
         }
