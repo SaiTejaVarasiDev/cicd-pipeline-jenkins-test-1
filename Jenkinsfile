@@ -26,6 +26,13 @@ pipeline {
                 echo "$SF_SERVER_KEY"
             }
         }
+        stage('Checking Server key access ') {
+            steps {
+                withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
+                    echo "${secret_file_key}"
+                }
+            }
+        }
         
     }
 }
