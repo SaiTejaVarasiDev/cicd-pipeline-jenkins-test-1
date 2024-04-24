@@ -2,12 +2,12 @@ node{
     stage('Checkout source code'){
         checkout scm
     }
-    stage('Example') {
-      steps {
+    // stage('Example') {
+    //   steps {
 
-          bat 'echo "working"'
-      }
-    }
+    //       bat 'echo "working"'
+    //   }
+    // }
     stage('running script'){
         rc = commad "sf --version"
         if (rc != 0) {
