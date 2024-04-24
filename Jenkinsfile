@@ -38,7 +38,7 @@ pipeline {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
-                        bat "sf org login jwt --client-id ${SF_CONSUMER_KEY} --jwt-key-file ${secret_file_key} --username ${SF_USERNAME} --alias my-hub-org"
+                        bat "sf org login jwt --client-id ${SF_CONSUMER_KEY} --jwt-key-file ${SF_SERVER_KEY} --username ${SF_USERNAME} --alias my-hub-org"
                     }
                 }
             }
