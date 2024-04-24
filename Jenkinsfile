@@ -4,7 +4,7 @@ pipeline {
         SF_INSTANCE_URL = credentials('SF_INSTANCE_URL')
         SF_USERNAME = credentials('SF_USERNAME')
         SF_CONSUMER_KEY = credentials('SF_CONSUMER_KEY')
-        SF_SERVER_KEY = credentials('SF_SERVER_KEY')
+        // SF_SERVER_KEY = credentials('SF_SERVER_KEY')
     }
     stages {
         stage('Checking sf installation') {
@@ -27,22 +27,22 @@ pipeline {
         //         }
         //     }
         // }
-        stage('copying server key file'){
-            steps {
-                withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
-                    bat "cd"
-                    bat "copy ${secret_file_key}"
-                    bat "dir"
-                }
+        // stage('copying server key file'){
+        //     steps {
+        //         withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
+        //             bat "cd"
+        //             bat "copy ${secret_file_key}"
+        //             bat "dir"
+        //         }
                 
-            }
-        }
+        //     }
+        // }
         stage('Authorize to org') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    // withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
-                        bat "sf org login jwt --client-id ${SF_CONSUMER_KEY} --jwt-key-file server.key --username ${SF_USERNAME} --alias my-hub-org"
-                    // }
+                    withCredentials([file(credentialsId: 'SF_SERVER_KEY', variable: 'secret_file_key')]){
+                        bat "sf org login jwt --client-id ${SF_CONSUMER_KEY} --jwt-key-file ${secret_file_key} --username ${SF_USERNAME} --alias my-hub-org"
+                    }
                 }
             }
         }
