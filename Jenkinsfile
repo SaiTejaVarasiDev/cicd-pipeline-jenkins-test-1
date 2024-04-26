@@ -7,22 +7,35 @@ pipeline {
         // SF_SERVER_KEY = credentials('SF_SERVER_KEY')
     }
     stages {
-        stage('testing') {
-            steps {
-                echo "testing"
-            }
-        }
         stage('developer branch') {
             when {
                 branch 'developer'
             }
             steps {
-                echo "developer branch"
+                echo "developer branch with change request"
+            }
+        }
+        stage('developer branch with pull request') {
+            when {
+                branch 'developer'
+                changeRequest targetBranch: 'developer', approved: true
+            }
+            steps {
+                echo "developer branch with change request"
             }
         }
         stage('production branch') {
             when {
                 branch 'production'
+            }
+            steps {
+                echo "production branch"
+            }
+        }
+        stage('production branch with pull request') {
+            when {
+                branch 'production'
+                changeRequest targetBranch: 'production', approved: true
             }
             steps {
                 echo "production branch"
@@ -67,15 +80,5 @@ pipeline {
         
     }
 }
-// node{
-//     stage('Checkout source code'){
-//         checkout scm
-//     }
-    
-//     stage('running script'){
-//         echo 'testing sf'
-//         bat 'sf --version'
-//     }
-    
-// }
+
 
