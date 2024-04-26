@@ -8,8 +8,19 @@ pipeline {
     }
     stages {
         stage('developer branch') {
+            when {
+                branch 'developer'
+            }
             steps {
                 echo "developer branch"
+            }
+        }
+        stage('production branch') {
+            when {
+                branch 'production'
+            }
+            steps {
+                echo "production branch"
             }
         }
         stage('Checking sf installation') {
