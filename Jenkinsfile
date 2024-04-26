@@ -18,7 +18,7 @@ pipeline {
         stage('developer branch with pull request') {
             when {
                 branch 'developer'
-                changeRequest targetBranch: 'developer', approved: true
+                changeRequest target: 'developer'
             }
             steps {
                 echo "developer branch with change request"
@@ -35,7 +35,7 @@ pipeline {
         stage('production branch with pull request') {
             when {
                 branch 'production'
-                changeRequest targetBranch: 'production', approved: true
+                changeRequest target: 'production'
             }
             steps {
                 echo "production branch"
