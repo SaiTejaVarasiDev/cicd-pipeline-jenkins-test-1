@@ -7,6 +7,11 @@ pipeline {
         // SF_SERVER_KEY = credentials('SF_SERVER_KEY')
     }
     stages {
+        stage('testing') {
+            steps {
+                echo "testing"
+            }
+        }
         stage('developer branch') {
             when {
                 branch 'developer'
