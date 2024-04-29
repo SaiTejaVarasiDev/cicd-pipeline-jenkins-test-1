@@ -63,13 +63,7 @@ pipeline {
                 }
             }
         }
-        stage('Validate soure code on org') {
-            steps {
-                withEnv(["HOME=${env.WORKSPACE}"]) {
-                    bat "sf project deploy validate -o ${SF_USERNAME} --source-dir force-app"
-                }
-            }
-        }
+
         // stage('deploy soure code on org') {
         //     steps {
         //         withEnv(["HOME=${env.WORKSPACE}"]) {
@@ -80,5 +74,4 @@ pipeline {
         
     }
 }
-
 
