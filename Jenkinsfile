@@ -11,12 +11,11 @@ pipeline {
                 branch 'developer'
             }
             steps {
-                echo "developer branch with change request"
+                echo "developer branch without change request"
             }
         }
         stage('developer branch with pull request') {
             when {
-                branch 'developer'
                 changeRequest target: 'developer'
             }
             steps {
@@ -33,11 +32,10 @@ pipeline {
         }
         stage('production branch with pull request') {
             when {
-                branch 'production'
                 changeRequest target: 'production'
             }
             steps {
-                echo "production branch"
+                echo "production branch with change request"
             }
         }
         stage('Checking sf installation') {
@@ -45,14 +43,13 @@ pipeline {
                 bat 'sf --version'
             }
         }
-        stage('Testing credentials') {
-            steps {
-                echo "$SF_INSTANCE_URL"
-                echo "$SF_USERNAME"
-                echo "$SF_CONSUMER_KEY"
-                // echo "$SF_SERVER_KEY"
-            }
-        }
+        // stage('Testing credentials') {
+        //     steps {
+        //         echo "$SF_INSTANCE_URL"
+        //         echo "$SF_USERNAME"
+        //         echo "$SF_CONSUMER_KEY"
+        //     }
+        // }
         stage('Authorize to org') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
