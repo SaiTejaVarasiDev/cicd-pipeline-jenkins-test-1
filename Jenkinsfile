@@ -68,6 +68,13 @@ pipeline {
                 }
             }
         }
+        stage('retrieve code') {
+            steps {
+                withEnv(["HOME=${env.WORKSPACE}"]) {
+                    bat "sf project retrieve start --metadata ApexClass"
+                }
+            }
+        }
 
         // stage('deploy soure code on org') {
         //     steps {
