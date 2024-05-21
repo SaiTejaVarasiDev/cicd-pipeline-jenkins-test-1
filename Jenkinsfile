@@ -6,43 +6,43 @@ pipeline {
         SF_CONSUMER_KEY = credentials('SF_CONSUMER_KEY')
     }
     stages {
-        stage('developer branch') {
-            when {
-                branch 'developer'
-            }
-            steps {
-                echo "developer branch without change request"
-            }
-        }
-        stage('developer branch with pull request') {
-            when {
-                changeRequest target: 'developer'
-            }
-            steps {
-                echo "developer branch with change request"
-            }
-        }
-        stage('production branch') {
-            when {
-                branch 'production'
-            }
-            steps {
-                echo "production branch"
-            }
-        }
-        stage('production branch with pull request') {
-            when {
-                changeRequest target: 'production'
-            }
-            steps {
-                echo "production branch with change request"
-            }
-        }
-        stage('Checking sf installation') {
-            steps {
-                bat 'sf --version'
-            }
-        }
+        // stage('developer branch') {
+        //     when {
+        //         branch 'developer'
+        //     }
+        //     steps {
+        //         echo "developer branch without change request"
+        //     }
+        // }
+        // stage('developer branch with pull request') {
+        //     when {
+        //         changeRequest target: 'developer'
+        //     }
+        //     steps {
+        //         echo "developer branch with change request"
+        //     }
+        // }
+        // stage('production branch') {
+        //     when {
+        //         branch 'production'
+        //     }
+        //     steps {
+        //         echo "production branch"
+        //     }
+        // }
+        // stage('production branch with pull request') {
+        //     when {
+        //         changeRequest target: 'production'
+        //     }
+        //     steps {
+        //         echo "production branch with change request"
+        //     }
+        // }
+        // stage('Checking sf installation') {
+        //     steps {
+        //         bat 'sf --version'
+        //     }
+        // }
         // stage('Testing credentials') {
         //     steps {
         
