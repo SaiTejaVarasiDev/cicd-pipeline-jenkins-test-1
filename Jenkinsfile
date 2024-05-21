@@ -71,7 +71,7 @@ pipeline {
         stage('retrieve code') {
             steps {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
-                    bat "sf project retrieve start --metadata ApexClass"
+                    bat "sf project retrieve start --metadata ApexClass --target-org my-hub-org"
                 }
             }
         }
