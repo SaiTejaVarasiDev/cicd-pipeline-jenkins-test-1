@@ -91,7 +91,10 @@ pipeline {
     }
     post {
         success {
-            echo "job ran successfully"
+            bat 'curl "https://api.GitHub.com/repos/SaiTejaVarasiDev/cicd-pipeline-jenkins-test-1/statuses/$GIT_COMMIT?access_token=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" \
+                      -H "Content-Type: application/json" \
+                      -X POST \
+                      -d "{\"state\": \"success\",\"context\": \"continuous-integration/jenkins\", \"description\": \"Jenkins\", \"target_url\": \"https://fda5-2409-40f0-11c6-da70-d5bc-77d8-f80e-c10a.ngrok-free.app/job/freestyle-testing/$BUILD_NUMBER/console\"}"'
         }
         failure {
             echo "job failed"
