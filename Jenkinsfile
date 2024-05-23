@@ -86,6 +86,15 @@ pipeline {
         //         }
         //     }
         // }
+
+        post {
+            success {
+                echo "job ran successfully"
+            }
+            failure {
+                echo "job failed"
+            }
+        }
         
     }
 }
