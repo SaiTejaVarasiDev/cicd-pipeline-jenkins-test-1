@@ -7,39 +7,39 @@ pipeline {
     }
     stages {
         
-        // stage('developer branch') {
-        //     when {
-        //         branch 'developer'
-        //     }
-        //     steps {
-        //         echo "developer branch without change request"
-        //     }
-        // }
-        // stage('developer branch with pull request') {
-        //     when {
-        //         changeRequest target: 'developer'
-        //     }
-        //     steps {
-        //         echo "developer branch with change request"
-        //     }
-        // }
-        // stage('production branch') {
-        //     when {
-        //         branch 'production'
-        //     }
-        //     steps {
-        //         echo "production branch"
-        //     }
-        // }
+        stage('developer branch') {
+            when {
+                branch 'developer'
+            }
+            steps {
+                echo "developer branch"
+            }
+        }
+        stage('developer branch with pull request') {
+            when {
+                changeRequest target: 'developer'
+            }
+            steps {
+                echo "developer branch with change request"
+            }
+        }
+        stage('production branch') {
+            when {
+                branch 'production'
+            }
+            steps {
+                echo "production branch"
+            }
+        }
         
-        // stage('production branch with pull request') {
-        //     when {
-        //         changeRequest target: 'production'
-        //     }
-        //     steps {
-        //         echo "production branch with change request"
-        //     }
-        // }
+        stage('production branch with pull request') {
+            when {
+                changeRequest target: 'production'
+            }
+            steps {
+                echo "production branch with change request"
+            }
+        }
         // stage('Checking sf installation') {
         //     steps {
         //         bat 'sf --version'
